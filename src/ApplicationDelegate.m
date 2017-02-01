@@ -3,7 +3,7 @@
 
 const float HORIZONTAL_MARGIN = 0.2f;
 const float VERTICAL_MARGIN = 0.2f;
-NSString* IMAGE_NAME = @"skyrim";
+NSString* IMAGE_NAME = @"skyrim_man";
 NSString* IMAGE_EXT = @"png";
 
 @implementation ApplicationDelegate
@@ -28,7 +28,7 @@ NSString* IMAGE_EXT = @"png";
 
    [window makeKeyAndOrderFront:self];
 
-   NSLog(@"Stuff: %@", window.contentView);
+   NSLog(@"Window content view: %@", window.contentView);
 }
 
 - (NSRect)centeredWindowFrameWithProportionalWidth:(float)width 
@@ -54,7 +54,8 @@ NSString* IMAGE_EXT = @"png";
                                                           ofType:IMAGE_EXT];
     NSLog(@"imagePath: %@", imagePath);
 
-    return nil;
+    NSImage* image = [[NSImage alloc] initWithContentsOfFile:imagePath];
+    return image;
 }
 
 @end 

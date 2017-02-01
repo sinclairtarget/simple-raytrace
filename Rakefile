@@ -32,7 +32,7 @@ file EXECUTABLE_PATH => SOURCE_FILES.ext('.o') do |t|
 end
 CLEAN.include(SOURCE_FILES.ext('.o'))
 
-file BUILD_PLIST_PATH do |t|
+file BUILD_PLIST_PATH => SOURCE_PLIST_PATH do |t|
   mkdir_p t.name.pathmap("%d")
   cp SOURCE_PLIST_PATH, BUILD_PLIST_PATH
 end

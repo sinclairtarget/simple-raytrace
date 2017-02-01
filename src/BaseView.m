@@ -15,6 +15,7 @@
     [super initWithFrame:frameRect];
 
     self.imageToDraw = image;
+    NSLog(@"Initialized with image: %@", self.imageToDraw);
 
 //    float width = frameRect.size.width;
 //    float height = frameRect.size.height;
@@ -32,13 +33,17 @@
 {
     NSGraphicsContext* context = [NSGraphicsContext currentContext];
     NSLog(@"drawRect with context: %@", context);
-    NSLog(@"image: %@", self.imageToDraw);
 
     NSColor* blue = [NSColor blueColor];
 
     NSRect rect = NSMakeRect(21, 21, 210, 210);
     [blue set];
     NSRectFill(rect);
+
+    [self.imageToDraw drawAtPoint:CGPointMake(0, 0)
+                         fromRect:NSZeroRect
+                        operation:NSCompositingOperationSourceOver
+                         fraction:1];
 }
 
 @end
