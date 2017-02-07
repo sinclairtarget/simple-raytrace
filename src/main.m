@@ -11,7 +11,6 @@ int main(int argc, char* argv[])
     [[NSApplication sharedApplication] setDelegate:delegate];
 
     // Run application
-//    return NSApplicationMain(argc, (const char **) argv);
     [[NSApplication sharedApplication] run];
 
     return 0;
