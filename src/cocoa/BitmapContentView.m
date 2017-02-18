@@ -26,7 +26,6 @@
                     fromRect:NSZeroRect
                    operation:NSCompositingOperationSourceOver
                     fraction:1];
-    NSLog(@"Drew content view.");
 }
 
 @end

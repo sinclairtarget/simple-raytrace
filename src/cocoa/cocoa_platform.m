@@ -21,11 +21,16 @@ void init()
     }
 }
 
-void createWindow(float proportionalWidth, float proportionalHeight)
+RectSize createWindow(float proportionalWidth, float proportionalHeight)
 {
-    NSLog(@"Creating window...");
+    //NSLog(@"Creating window...");
     NSSize proportionalSize = NSMakeSize(proportionalWidth, proportionalHeight);
     window = [[BitmapWindow alloc] initWithProportionalSize:proportionalSize];
+    
+    RectSize size;
+    size.width = window.contentBounds.size.width;
+    size.height = window.contentBounds.size.height;
+    return size;
 }
 
 void processEvents()
@@ -38,7 +43,7 @@ void processEvents()
                                                inMode:NSDefaultRunLoopMode
                                               dequeue:YES];
         if (event != nil) {
-            NSLog(@"Sending event: %@", event);
+            //NSLog(@"Sending event: %@", event);
             [NSApp sendEvent:event];
         }
         else {
@@ -49,6 +54,6 @@ void processEvents()
 
 void draw(int x, int y, float r, float g, float b, float a)
 {
-    NSColor* color = [NSColor colorWithSRGBRed:r green:g blue:b alpha:a];
+    NSColor* color = [NSColor colorWithCalibratedRed:r green:g blue:b alpha:a];
     [window setColor:color atX:x y:y];
 }
