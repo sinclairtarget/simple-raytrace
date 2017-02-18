@@ -18,7 +18,8 @@ EXECUTABLE_PATH = "#{APP_EXECUTABLE_DIRECTORY}/#{APP_NAME}".freeze
 SOURCE_PLIST_PATH = 'Info.plist'.freeze
 BUILD_PLIST_PATH = "#{APP_CONTENTS_DIRECTORY}/Info.plist".freeze
 
-SOURCE_FILES = FileList["#{SOURCE_DIRECTORY}/**/*.m"]
+SOURCE_FILES = FileList["#{SOURCE_DIRECTORY}/**/*.m",
+                        "#{SOURCE_DIRECTORY}/**/*.c"] 
 ASSET_FILES = FileList["#{ASSETS_DIRECTORY}/*"]
 
 task :default => [:build_app]
@@ -43,6 +44,10 @@ file APP_RESOURCES_DIRECTORY => ASSET_FILES do |t|
 end
 
 rule '.o' => ['.m'] do |t|
+  sh "clang -c #{t.source} -o #{t.name}"
+end
+
+rule '.o' => ['.c'] do |t|
   sh "clang -c #{t.source} -o #{t.name}"
 end
 
