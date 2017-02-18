@@ -8,6 +8,14 @@ typedef struct {
     int height;
 } RectSize;
 
+// An RGB color.
+typedef struct {
+    float r;
+    float g;
+    float b;
+    float a;
+} Color;
+
 /*
  * Perform platform-specific initialization. 
  *
@@ -30,6 +38,6 @@ void processEvents();
 /*
  * Draws a pixel in the window.
  *
- * The origin of the coordinate system is the lower-left corner of the window.
+ * The origin of the coordinate system is the upper-left corner of the window.
  */
-void draw(int x, int y, float r, float g, float b, float a);
+void draw(int x, int y, Color color);

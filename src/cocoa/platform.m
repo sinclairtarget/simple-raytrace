@@ -23,7 +23,6 @@ void init()
 
 RectSize createWindow(float proportionalWidth, float proportionalHeight)
 {
-    //NSLog(@"Creating window...");
     NSSize proportionalSize = NSMakeSize(proportionalWidth, proportionalHeight);
     window = [[BitmapWindow alloc] initWithProportionalSize:proportionalSize];
     
@@ -52,8 +51,11 @@ void processEvents()
     }
 }
 
-void draw(int x, int y, float r, float g, float b, float a)
+void draw(int x, int y, Color color)
 {
-    NSColor* color = [NSColor colorWithCalibratedRed:r green:g blue:b alpha:a];
-    [window setColor:color atX:x y:y];
+    NSColor* cocoaColor = [NSColor colorWithCalibratedRed:color.r 
+                                                    green:color.g 
+                                                     blue:color.b
+                                                    alpha:color.a];
+    [window setColor:cocoaColor atX:x y:y];
 }

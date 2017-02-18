@@ -6,6 +6,8 @@ int main(int argc, char* argv[])
     init();
     RectSize size = createWindow(0.8f, 0.8f);
 
+    Color red = { 1, 0, 0, 1 };
+
     int x = 0;
     int y = 0;
 
@@ -13,7 +15,7 @@ int main(int argc, char* argv[])
         processEvents();
 
         if (x < size.width && y < size.height) {
-            draw(x, y, 1, 0, 0, 1);
+            draw(x, y, red);
             x += 1;
             y += 1;
         }
