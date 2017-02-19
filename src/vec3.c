@@ -2,11 +2,35 @@
 
 #include "Vec3.h"
 
+Vec3 Vec3Neg(Vec3 v)
+{
+    v.x = -v.x;
+    v.y = -v.y;
+    v.z = -v.z;
+    return v;
+}
+
 Vec3 Vec3Add(Vec3 a, Vec3 b)
 {
     a.x += b.x;
     a.y += b.y;
     a.z += b.z;
+    return a;
+}
+
+Vec3 Vec3Sub(Vec3 a, Vec3 b)
+{
+    a.x -= b.x;
+    a.y -= b.y;
+    a.z -= b.z;
+    return a;
+}
+
+Vec3 Vec3Scale(Vec3 v, float scalar)
+{
+    a.x *= scalar;
+    a.y *= scalar;
+    a.z *= scalar;
     return a;
 }
 

@@ -11,6 +11,11 @@ Ray* RayCreate(Vec3 origin, Vec3 direction)
     return ray;
 }
 
+Vec3 RayEvaluatePoint(Ray* ray, float t)
+{
+    return Vec3Add(ray.origin, Vec3Scale(ray.direction, t));
+}
+
 char* RayToString(Ray* ray)
 {
     char* str;

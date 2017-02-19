@@ -7,8 +7,17 @@ typedef struct {
     float z;
 } Vec3;
 
+// Unary negation.
+Vec3 Vec3Neg(Vec3 v);
+
 // Vector addition.
 Vec3 Vec3Add(Vec3 a, Vec3 b);
+
+// Vector subtraction.
+Vec3 Vec3Sub(Vec3 a, Vec3 b);
+
+// Scalar multiplication.
+Vec3 Vec3Scale(Vec3 v, float scalar);
 
 // Dot product.
 float Vec3Dot(Vec3 a, Vec3 b);

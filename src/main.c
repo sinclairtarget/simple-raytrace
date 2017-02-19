@@ -3,8 +3,8 @@
 
 #include "platform.h"
 #include "vec3.h"
-#include "sphere.h"
 #include "ray.h"
+#include "surfaces.h"
 
 int main(int argc, char* argv[])
 {
