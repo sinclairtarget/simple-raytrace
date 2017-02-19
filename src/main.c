@@ -8,16 +8,11 @@
 
 int main(int argc, char* argv[])
 {
-    Vec3 a = { 0.5, 0.2, 1.2 };
-    Vec3 b = { 0.2, 0.3, 1 };
-    Vec3 sum = Vec3Add(a, b);
-    printf("sum: %s\n", Vec3ToString(sum));
+    Vec3 a = { 2.3, 1, 1.34 };
+    Vec3 b = { 1, 3, 1 };
 
-    Sphere* sphere = SphereCreate(a, 2.3);
-    printf("sphere: %s\n", SphereToString(sphere));
-
-    Ray* ray = RayCreate(a, b);
-    printf("ray: %s\n", RayToString(ray));
+    float p = Vec3Dot(a, b);
+    printf("p: %f\n", p);
 
 //    init();
 //    RectSize size = createWindow(0.8f, 0.8f);
