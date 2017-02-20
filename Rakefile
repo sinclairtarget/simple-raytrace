@@ -27,6 +27,7 @@ task :default => [:build_app]
 desc 'Builds the entire application, outputting an application bundle.'
 task :build_app => [BUILD_PLIST_PATH, EXECUTABLE_PATH, APP_RESOURCES_DIRECTORY]
 
+# TODO: Put object files somewhere separate instead of under /src
 file EXECUTABLE_PATH => SOURCE_FILES.ext('.o') do |t|
   mkdir_p t.name.pathmap("%d")
   sh "clang -framework Cocoa -o #{t.name} #{t.prerequisites.join(' ')}"
@@ -43,11 +44,27 @@ file APP_RESOURCES_DIRECTORY => ASSET_FILES do |t|
   cp ASSET_FILES, APP_RESOURCES_DIRECTORY
 end
 
-rule '.o' => ['.m'] do |t|
+# Uses clang to determine the dependencies of a source file.
+# Returns an array of file names.
+def file_deps(task_name, file_ext)
+  source_file_name = task_name.ext(file_ext)
+  return [] unless File.exist?(source_file_name)
+
+  out = `clang -E -MM #{source_file_name}`
+  raise "Dependency generation failed!" unless $?.success?
+
+  # Clang dependency file format example:
+  # triangle.o: triangle.c triangle.h \
+  #   math_utils.h
+  out.split(':').last.split
+     .reject { |e| e == '\\' || e == source_file_name }
+end
+
+rule '.o' => ['.c', *(-> (task_name) { file_deps(task_name, '.c') })] do |t|
   sh "clang -c #{t.source} -o #{t.name}"
 end
 
-rule '.o' => ['.c'] do |t|
+rule '.o' => ['.m', *(-> (task_name) { file_deps(task_name, '.m') })] do |t|
   sh "clang -c #{t.source} -o #{t.name}"
 end
 
