@@ -28,10 +28,10 @@ Vec3 Vec3Sub(Vec3 a, Vec3 b)
 
 Vec3 Vec3Scale(Vec3 v, float scalar)
 {
-    a.x *= scalar;
-    a.y *= scalar;
-    a.z *= scalar;
-    return a;
+    v.x *= scalar;
+    v.y *= scalar;
+    v.z *= scalar;
+    return v;
 }
 
 float Vec3Dot(Vec3 a, Vec3 b)

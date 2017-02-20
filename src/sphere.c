@@ -12,23 +12,23 @@ Sphere* SphereCreate(Vec3 center, float radius)
     return sphere;
 }
 
-RayHit* RayIntersect(Sphere* sphere, Ray* ray)
+RayHit* SphereIntersect(Sphere* sphere, Ray* ray)
 {
-    Vec3 originMinusCenter = Vec3Sub(ray.origin, sphere.center);
-    Vec3 dotDirection = Vec3Dot(ray.direction, ray.direction);
+    Vec3 originMinusCenter = Vec3Sub(ray->origin, sphere->center);
+    float dotDirection = Vec3Dot(ray->direction, ray->direction);
 
     // descriminant = (b^2) - a c
-    float b = Vec3Dot(ray.direction, originMinusCenter);
-    float a = Vec3Dot(ray.direction, ray.direction);
+    float b = Vec3Dot(ray->direction, originMinusCenter);
+    float a = Vec3Dot(ray->direction, ray->direction);
     float c = Vec3Dot(originMinusCenter, originMinusCenter) - 
-        sphere.radius * sphere.radius;
+        sphere->radius * sphere->radius;
 
     float desc = b * b - a * c;
     if (desc < 0) // No intersection
         return NULL;
 
     // solve quadratic equation
-    float outsideSqrt = Vec3Dot(Vec3Neg(ray.direction), originMinusCenter);
+    float outsideSqrt = Vec3Dot(Vec3Neg(ray->direction), originMinusCenter);
     float t1 = (outsideSqrt - sqrt(desc)) / dotDirection;
     float t2 = (outsideSqrt + sqrt(desc)) / dotDirection;
 
