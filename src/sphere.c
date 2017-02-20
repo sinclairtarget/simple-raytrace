@@ -42,8 +42,14 @@ RayHit* SphereIntersect(Sphere* sphere, Ray* ray)
 
 char* SphereToString(Sphere* sphere)
 {
-    char* str;
     char* format = "[(Sphere) center:%s radius:%.2f]";
-    asprintf(&str, format, Vec3ToString(sphere->center), sphere->radius);
+
+    char* center = Vec3ToString(sphere->center);
+
+    char* str;
+    asprintf(&str, format, center, sphere->radius);
+
+    free(center);
+
     return str;
 }

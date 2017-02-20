@@ -18,9 +18,16 @@ Vec3 RayEvaluatePoint(Ray* ray, float t)
 
 char* RayToString(Ray* ray)
 {
-    char* str;
     char* format = "[(Ray) origin:%s direction:%s]";
-    asprintf(&str, format, Vec3ToString(ray->origin), 
-            Vec3ToString(ray->direction));
+
+    char* origin = Vec3ToString(ray->origin);
+    char* direction = Vec3ToString(ray->direction);
+
+    char* str;
+    asprintf(&str, format, origin, direction);
+
+    free(origin);
+    free(direction);
+
     return str;
 }

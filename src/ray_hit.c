@@ -8,10 +8,16 @@ char* RayHitToString(RayHit* rayHit)
     if (rayHit == NULL)
         return "NULL";
 
-    char* str;
     char* format = "[(RayHit) point:%s normal:%s t:%.2f]";
-    asprintf(&str, format, Vec3ToString(rayHit->point),
-                           Vec3ToString(rayHit->normal),
-                           rayHit->t);
+
+    char* point = Vec3ToString(rayHit->point);
+    char* normal = Vec3ToString(rayHit->normal);
+
+    char* str;
+    asprintf(&str, format, point, normal, rayHit->t);
+
+    free(point);
+    free(normal);
+
     return str;
 }
