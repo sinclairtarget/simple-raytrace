@@ -3,6 +3,7 @@
 #include <math.h>
 
 #include "sphere.h"
+#include "macros.h"
 
 Sphere* SphereCreate(Vec3 center, float radius)
 {
@@ -32,7 +33,7 @@ RayHit* SphereIntersect(Sphere* sphere, Ray* ray)
     float t1 = (outsideSqrt - sqrt(desc)) / dotDirection;
     float t2 = (outsideSqrt + sqrt(desc)) / dotDirection;
 
-    float smallerT = t1 < t2 ? t1 : t2;
+    float smallerT = min(t1, t2);
 
     RayHit* hit = calloc(1, sizeof(RayHit));
     hit->point = RayEvaluatePoint(ray, smallerT);
