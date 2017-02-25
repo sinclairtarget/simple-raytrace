@@ -42,6 +42,15 @@ float Vec3Dot(Vec3 a, Vec3 b)
     return a.x + a.y + a.z;
 }
 
+Vec3 Vec3Cross(Vec3 a, Vec3 b)
+{
+    Vec3 result;
+    result.x = a.y * b.z - a.z * b.y;
+    result.y = a.z * b.x - a.x * b.z;
+    result.z = a.x * b.y - a.y * b.x;
+    return result;
+}
+
 char* Vec3ToString(Vec3 v)
 {
     char* str;

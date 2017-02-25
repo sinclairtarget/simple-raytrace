@@ -22,6 +22,9 @@ Vec3 Vec3Scale(Vec3 v, float scalar);
 // Dot product.
 float Vec3Dot(Vec3 a, Vec3 b);
 
+// Cross product.
+Vec3 Vec3Cross(Vec3 a, Vec3 b);
+
 // Returns a string representation of the vector for debugging.
 char* Vec3ToString(Vec3 v);
 
