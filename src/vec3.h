@@ -10,6 +10,9 @@ typedef struct {
 // Unary negation.
 Vec3 Vec3Neg(Vec3 v);
 
+// Vector normalization.
+Vec3 Vec3Norm(Vec3 v);
+
 // Vector addition.
 Vec3 Vec3Add(Vec3 a, Vec3 b);
 

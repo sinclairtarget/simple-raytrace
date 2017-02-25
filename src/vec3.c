@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 #include "Vec3.h"
 
@@ -8,6 +9,12 @@ Vec3 Vec3Neg(Vec3 v)
     v.y = -v.y;
     v.z = -v.z;
     return v;
+}
+
+Vec3 Vec3Norm(Vec3 v)
+{
+    float scalar = 1 / sqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
+    return Vec3Scale(v, scalar);
 }
 
 Vec3 Vec3Add(Vec3 a, Vec3 b)
