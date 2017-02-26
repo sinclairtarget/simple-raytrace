@@ -6,6 +6,7 @@
 #include "ray.h"
 #include "camera.h"
 #include "scene.h"
+#include "macros.h"
 
 static Camera* BuildCamera();
 
@@ -20,8 +21,6 @@ int main(int argc, char* argv[])
     Color blue = { 0, 0, 1, 1 };
     Sphere* sphere = SphereCreate(center, 0.5f, blue);
     SceneAdd(sphere);
-
-    printf("scene: %s\n", SceneToString());
 
     int x = 0;
     int y = 0;
@@ -64,7 +63,7 @@ static Camera* BuildCamera(RectSize windowSize)
     Camera* cam = CameraCreateOrthographic(camPos, upDir, viewDir, 
                                            imagePlaneSize, background);
 
-    printf("cam: %s\n", CameraToString(cam));
+    dprint(cam, Camera);
 
     return cam;
 }
