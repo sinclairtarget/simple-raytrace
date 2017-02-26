@@ -3,8 +3,6 @@
 
 #include "camera.h"
 #include "ray.h"
-#include "sphere.h"
-#include "scene.h"
 
 static Ray* CameraGenerateRayOrthographic(Camera* camera, 
                                           int i, 
@@ -19,7 +17,8 @@ static Ray* CameraGenerateRayPerspective(Camera* camera,
 Camera* CameraCreateOrthographic(Vec3 position, 
                                  Vec3 upDirection, 
                                  Vec3 viewDirection,
-                                 RectSize imagePlaneSize)
+                                 RectSize imagePlaneSize,
+                                 Color backgroundColor)
 {
     Camera* camera = (Camera*) malloc(sizeof(Camera));
 
@@ -35,11 +34,12 @@ Camera* CameraCreateOrthographic(Vec3 position,
 
     camera->mode = ORTHOGRAPHIC;
     camera->imagePlaneSize = imagePlaneSize;
+    camera->backgroundColor = backgroundColor;
 
     return camera;
 }
 
-RayHit* CameraSamplePixel(Camera* camera, int i, int j, RectSize imageSize)
+Color CameraSamplePixel(Camera* camera, int i, int j, RectSize imageSize)
 {
     Ray* ray;
     if (camera->mode == ORTHOGRAPHIC)
@@ -47,19 +47,13 @@ RayHit* CameraSamplePixel(Camera* camera, int i, int j, RectSize imageSize)
     else
         ray = CameraGenerateRayPerspective(camera, i, j, imageSize);
 
-    RayHit* closestHit = NULL;
-    for (int index = 0; index < globalScene->objectCount; index++) {
-        Sphere* sphere = globalScene->objects[index];
-        RayHit* hit = SphereIntersect(sphere, ray);
+    RayHit* hit = RayCast(ray);
+    Color color = (hit == NULL) ? camera->backgroundColor : hit->surfaceColor;
 
-        if (hit == NULL)
-            continue;
+    free(ray);
+    free(hit);
 
-        if (closestHit == NULL || hit->t < closestHit->t)
-            closestHit = hit;
-    }
-
-    return closestHit;
+    return color;
 }
 
 char* CameraToString(Camera* camera)

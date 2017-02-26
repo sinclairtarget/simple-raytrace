@@ -1,23 +1,11 @@
 #ifndef PLATFORM_H
 #define PLATFORM_H
 
+#include "graphics.h"
+
 /*
  * Defines the platform-agnostic windowing and drawing API.
  */
-
-// The size of a rectangle.
-typedef struct {
-    int width;
-    int height;
-} RectSize;
-
-// An RGB color.
-typedef struct {
-    float r;
-    float g;
-    float b;
-    float a;
-} Color;
 
 /*
  * Perform platform-specific initialization. 

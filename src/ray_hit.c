@@ -3,6 +3,18 @@
 
 #include "ray_hit.h"
 
+RayHit* RayHitCreate(Color surfaceColor, Vec3 point, Vec3 normal, float t)
+{
+    RayHit* hit = (RayHit*) malloc(sizeof(RayHit));
+
+    hit->surfaceColor = surfaceColor;
+    hit->point = point;
+    hit->normal = normal;
+    hit->t = t;
+
+    return hit;
+}
+
 char* RayHitToString(RayHit* rayHit)
 {
     if (rayHit == NULL)

@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include "ray.h"
+#include "scene.h"
 
 Ray* RayCreate(Vec3 origin, Vec3 direction)
 {
@@ -9,6 +10,24 @@ Ray* RayCreate(Vec3 origin, Vec3 direction)
     ray->origin = origin;
     ray->direction = direction;
     return ray;
+}
+
+RayHit* RayCast(Ray* ray)
+{
+    RayHit* closestHit = NULL;
+
+    for (int index = 0; index < globalScene->objectCount; index++) {
+        Sphere* sphere = globalScene->objects[index];
+        RayHit* hit = SphereIntersect(sphere, ray);
+
+        if (hit == NULL)
+            continue;
+
+        if (closestHit == NULL || hit->t < closestHit->t)
+            closestHit = hit;
+    }
+
+    return closestHit;
 }
 
 Vec3 RayEvaluatePoint(Ray* ray, float t)

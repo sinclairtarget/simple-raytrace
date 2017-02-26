@@ -5,11 +5,14 @@
 #include "sphere.h"
 #include "macros.h"
 
-Sphere* SphereCreate(Vec3 center, float radius)
+Sphere* SphereCreate(Vec3 center, float radius, Color color)
 {
     Sphere* sphere = (Sphere*) malloc(sizeof(Sphere));
+
     sphere->center = center;
     sphere->radius = radius;
+    sphere->color = color;
+
     return sphere;
 }
 
@@ -34,10 +37,10 @@ RayHit* SphereIntersect(Sphere* sphere, Ray* ray)
     float t2 = (outsideSqrt + sqrt(desc)) / dotDirection;
 
     float smallerT = min(t1, t2);
+    Vec3 point = RayEvaluatePoint(ray, smallerT);
+    Vec3 normal = { 0, 0, 0 };
 
-    RayHit* hit = calloc(1, sizeof(RayHit));
-    hit->point = RayEvaluatePoint(ray, smallerT);
-    hit->t = smallerT;
+    RayHit* hit = RayHitCreate(sphere->color, point, normal, smallerT);
     return hit;
 }
 
