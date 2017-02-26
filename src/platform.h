@@ -27,10 +27,15 @@ RectSize CreateWindow(float proportionalWidth, float proportionalHeight);
 void ProcessEvents();
 
 /*
- * Draws a pixel in the window.
+ * Sets a pixel in the window back buffer.
  *
  * The origin of the coordinate system is the upper-left corner of the window.
  */
-void Draw(int x, int y, Color color);
+void SetColor(int x, int y, Color color);
+
+/*
+ * Draws the window back buffer to the screen.
+ */
+void Draw();
 
 #endif

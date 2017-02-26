@@ -33,13 +33,14 @@ int main(int argc, char* argv[])
             int j = windowSize.height - y;
             
             Color pixelColor = CameraSamplePixel(cam, i, j, windowSize);
-            Draw(x, y, pixelColor);
+            SetColor(x, y, pixelColor);
 
             x += 1;
 
             if (x == windowSize.width) {
                 x = 0;
                 y += 1;
+                Draw();
             }
         }
     }

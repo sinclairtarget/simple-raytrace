@@ -57,7 +57,7 @@ void ProcessEvents()
     }
 }
 
-void Draw(int x, int y, Color color)
+void SetColor(int x, int y, Color color)
 {
     @autoreleasepool {
         NSColor* cocoaColor = [NSColor colorWithCalibratedRed:color.r 
@@ -65,5 +65,12 @@ void Draw(int x, int y, Color color)
                                                          blue:color.b
                                                         alpha:color.a];
         [window setColor:cocoaColor atX:x y:y];
+    }
+}
+
+void Draw()
+{
+    @autoreleasepool {
+        [window draw];
     }
 }

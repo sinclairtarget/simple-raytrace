@@ -39,11 +39,11 @@
 - (void)setColor:(NSColor*)color atX:(NSUInteger)x y:(NSUInteger)y
 {
     [_imageRep setColor:color atX:x y:y];
-    _contentView.needsDisplay = YES;
 }
 
 - (void)draw
 {
+    _contentView.needsDisplay = YES;
     [_cocoaWindow display];
 }
 
