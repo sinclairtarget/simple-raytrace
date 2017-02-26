@@ -36,9 +36,11 @@ RayHit* SphereIntersect(Sphere* sphere, Ray* ray)
     float t1 = (outsideSqrt - sqrt(desc)) / dotDirection;
     float t2 = (outsideSqrt + sqrt(desc)) / dotDirection;
 
+    // prepare ray hit result
     float smallerT = min(t1, t2);
     Vec3 point = RayEvaluatePoint(ray, smallerT);
-    Vec3 normal = { 0, 0, 0 };
+    Vec3 normal = 
+        Vec3Scale(Vec3Sub(point, sphere->center), 1 / sphere->radius);
 
     RayHit* hit = RayHitCreate(sphere->color, point, normal, smallerT);
     return hit;
