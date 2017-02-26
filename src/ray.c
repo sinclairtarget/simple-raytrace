@@ -8,7 +8,7 @@ Ray* RayCreate(Vec3 origin, Vec3 direction)
 {
     Ray* ray = malloc(sizeof(Ray));
     ray->origin = origin;
-    ray->direction = direction;
+    ray->direction = Vec3Norm(direction);
     return ray;
 }
 
