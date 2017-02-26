@@ -4,7 +4,7 @@
 
 static BitmapWindow* window;
 
-void init()
+void Init()
 {
     @autoreleasepool {
         // Initialize application
@@ -21,7 +21,7 @@ void init()
     }
 }
 
-RectSize createWindow(float proportionalWidth, float proportionalHeight)
+RectSize CreateWindow(float proportionalWidth, float proportionalHeight)
 {
     NSSize proportionalSize = NSMakeSize(proportionalWidth, proportionalHeight);
     window = [[BitmapWindow alloc] initWithProportionalSize:proportionalSize];
@@ -32,7 +32,7 @@ RectSize createWindow(float proportionalWidth, float proportionalHeight)
     return size;
 }
 
-void processEvents()
+void ProcessEvents()
 {
     // Manually pull events from the event queue, since we're not relying on
     // Cocoa's default NSApplication run loop.
@@ -51,7 +51,7 @@ void processEvents()
     }
 }
 
-void draw(int x, int y, Color color)
+void Draw(int x, int y, Color color)
 {
     NSColor* cocoaColor = [NSColor colorWithCalibratedRed:color.r 
                                                     green:color.g 

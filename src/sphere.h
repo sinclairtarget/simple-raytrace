@@ -1,3 +1,6 @@
+#ifndef SPHERE_H
+#define SPHERE_H
+
 #include "vec3.h"
 #include "ray.h"
 
@@ -18,3 +21,5 @@ RayHit* SphereIntersect(Sphere* sphere, Ray* ray);
 
 // String representation for debugging.
 char* SphereToString(Sphere* sphere);
+
+#endif

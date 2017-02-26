@@ -1,3 +1,6 @@
+#ifndef PLATFORM_H
+#define PLATFORM_H
+
 /*
  * Defines the platform-agnostic windowing and drawing API.
  */
@@ -21,23 +24,25 @@ typedef struct {
  *
  * This must be called before anything else!
  */
-void init();
+void Init();
 
 /*
  * Creates and shows a window. Returns the window dimensions as a RectSize.
  *
  * The size of the window can be expressed as a ratio to screen size.
  */
-RectSize createWindow(float proportionalWidth, float proportionalHeight);
+RectSize CreateWindow(float proportionalWidth, float proportionalHeight);
 
 /*
  * Pulls all events from the event queue and dispatches them.
  */
-void processEvents();
+void ProcessEvents();
 
 /*
  * Draws a pixel in the window.
  *
  * The origin of the coordinate system is the upper-left corner of the window.
  */
-void draw(int x, int y, Color color);
+void Draw(int x, int y, Color color);
+
+#endif
