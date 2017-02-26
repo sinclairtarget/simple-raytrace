@@ -65,7 +65,7 @@ rule '.o' => ['.c', *(-> (task_name) { file_deps(task_name, '.c') })] do |t|
 end
 
 rule '.o' => ['.m', *(-> (task_name) { file_deps(task_name, '.m') })] do |t|
-  sh "clang -c #{t.source} -o #{t.name}"
+  sh "clang -fobjc-arc -c #{t.source} -o #{t.name}"
 end
 
 CLOBBER.include(BUILD_DIRECTORY)

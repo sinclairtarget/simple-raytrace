@@ -23,39 +23,47 @@ void Init()
 
 RectSize CreateWindow(float proportionalWidth, float proportionalHeight)
 {
-    NSSize proportionalSize = NSMakeSize(proportionalWidth, proportionalHeight);
-    window = [[BitmapWindow alloc] initWithProportionalSize:proportionalSize];
-    
-    RectSize size;
-    size.width = window.contentBounds.size.width;
-    size.height = window.contentBounds.size.height;
-    return size;
+    @autoreleasepool {
+        NSSize proportionalSize = 
+            NSMakeSize(proportionalWidth, proportionalHeight);
+        window = 
+            [[BitmapWindow alloc] initWithProportionalSize:proportionalSize];
+        
+        RectSize size;
+        size.width = window.contentBounds.size.width;
+        size.height = window.contentBounds.size.height;
+        return size;
+    }
 }
 
 void ProcessEvents()
 {
-    // Manually pull events from the event queue, since we're not relying on
-    // Cocoa's default NSApplication run loop.
-    for (;;) {
-        NSEvent* event = [NSApp nextEventMatchingMask:NSEventMaskAny
-                                            untilDate:[NSDate distantPast]
-                                               inMode:NSDefaultRunLoopMode
-                                              dequeue:YES];
-        if (event != nil) {
-            //NSLog(@"Sending event: %@", event);
-            [NSApp sendEvent:event];
-        }
-        else {
-            break;
+    @autoreleasepool {
+        // Manually pull events from the event queue, since we're not relying
+        // on Cocoa's default NSApplication run loop.
+        for (;;) {
+            NSEvent* event = [NSApp nextEventMatchingMask:NSEventMaskAny
+                                                untilDate:[NSDate distantPast]
+                                                   inMode:NSDefaultRunLoopMode
+                                                  dequeue:YES];
+            if (event != nil) {
+                //NSLog(@"Sending event: %@", event);
+                [NSApp sendEvent:event];
+            }
+            else {
+                break;
+            }
         }
     }
 }
 
 void Draw(int x, int y, Color color)
 {
-    NSColor* cocoaColor = [NSColor colorWithCalibratedRed:color.r 
-                                                    green:color.g 
-                                                     blue:color.b
-                                                    alpha:color.a];
-    [window setColor:cocoaColor atX:x y:y];
+    @autoreleasepool {
+        NSColor* cocoaColor = [NSColor colorWithCalibratedRed:color.r 
+                                                        green:color.g 
+                                                         blue:color.b
+                                                        alpha:color.a];
+        [window setColor:cocoaColor atX:x y:y];
+    }
 }
