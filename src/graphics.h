@@ -1,18 +1,12 @@
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 
+#include "color.h"
+
 // The size of a rectangle.
 typedef struct {
     float width;
     float height;
 } RectSize;
-
-// An RGB color.
-typedef struct {
-    float r;
-    float g;
-    float b;
-    float a;
-} Color;
 
 #endif

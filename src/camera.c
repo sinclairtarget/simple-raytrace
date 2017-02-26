@@ -3,6 +3,7 @@
 
 #include "camera.h"
 #include "ray.h"
+#include "shading.h"
 
 static Ray* CameraGenerateRayOrthographic(Camera* camera, 
                                           int i, 
@@ -48,7 +49,12 @@ Color CameraSamplePixel(Camera* camera, int i, int j, RectSize imageSize)
         ray = CameraGenerateRayPerspective(camera, i, j, imageSize);
 
     RayHit* hit = RayCast(ray);
-    Color color = (hit == NULL) ? camera->backgroundColor : hit->surfaceColor;
+
+    Color color;
+    if (hit == NULL)
+        color = camera->backgroundColor;
+    else
+        color = Shade(camera, hit);
 
     free(ray);
     free(hit);

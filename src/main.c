@@ -16,6 +16,7 @@ int main(int argc, char* argv[])
     RectSize windowSize = CreateWindow(0.8f, 0.8f);
 
     Camera* cam = BuildCamera(windowSize);
+    SceneInit(0.2f);
 
     Vec3 center = { 0, 0, -5 };
     Color blue = { 0, 0, 1, 1 };

@@ -5,15 +5,19 @@
 
 Scene* globalScene;
 
-static void Init();
+void SceneInit(float ambientLightIntensity)
+{
+    globalScene = (Scene*) calloc(1, sizeof(Scene));
+    globalScene->ambientLightIntensity = ambientLightIntensity;
+}
 
 int SceneAdd(Sphere* sphere)
 {
     if (globalScene == NULL)
-        Init();
+        return 1;
 
     if (globalScene->objectCount == MAX_SCENE_OBJECTS)
-        return 1;
+        return 2;
 
     globalScene->objects[globalScene->objectCount] = sphere;
     (globalScene->objectCount)++;
@@ -21,13 +25,11 @@ int SceneAdd(Sphere* sphere)
     return 0;
 }
 
-static void Init()
-{
-    globalScene = (Scene*) calloc(1, sizeof(Scene));
-}
-
 char* SceneToString()
 {
+    if (globalScene == NULL)
+        return "NULL";
+
     char* format = "[(Scene) objectCount:%d]";
     
     char* str;
