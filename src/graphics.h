@@ -3,8 +3,8 @@
 
 // The size of a rectangle.
 typedef struct {
-    int width;
-    int height;
+    float width;
+    float height;
 } RectSize;
 
 // An RGB color.

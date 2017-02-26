@@ -58,7 +58,8 @@ Color CameraSamplePixel(Camera* camera, int i, int j, RectSize imageSize)
 
 char* CameraToString(Camera* camera)
 {
-    char* format = "[(Camera) position:%s u:%s v:%s w:%s width:%d height:%d]";
+    char* format = 
+        "[(Camera) position:%s u:%s v:%s w:%s width:%.2f height:%.2f]";
 
     char* position = Vec3ToString(camera->position);
     char* u = Vec3ToString(camera->u);
