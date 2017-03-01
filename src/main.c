@@ -7,46 +7,63 @@
 #include "camera.h"
 #include "scene.h"
 #include "macros.h"
+#include "random_sort.h"
 
 static Camera* BuildCamera();
+static void PopulateCoordinateArray(OrderedPair array[], RectSize windowSize);
 
 int main(int argc, char* argv[])
 {
+    // Initialize the window
     Init();
     RectSize windowSize = CreateWindow(0.8f, 0.8f);
+    
+    // Set up the pixel coordinate array and scramble it
+    int totalPixelCount = windowSize.width * windowSize.height;
+    OrderedPair coordinateArray[totalPixelCount];
+    
+    PopulateCoordinateArray(coordinateArray, windowSize);
 
+    // Set up the scene and camera
     Camera* cam = BuildCamera(windowSize);
+
     SceneInit(0.2f);
 
-    Vec3 center = { 0, 0, -5 };
+    Vec3 blueSphereCenter = { -1, 0, -5 };
     Color blue = { 0, 0, 1, 1 };
-    Sphere* sphere = SphereCreate(center, 0.5f, blue);
-    SceneAdd(sphere);
+    Sphere* blueSphere = SphereCreate(blueSphereCenter, 0.5f, blue);
+    SceneAdd(blueSphere);
 
-    int x = 0;
-    int y = 0;
+    Vec3 greenSphereCenter = { 1, 0, -7 };
+    Color green = { 0, 1, 0, 1 };
+    Sphere* greenSphere = SphereCreate(greenSphereCenter, 0.5f, green);
+    SceneAdd(greenSphere);
 
-    for (;;) {
+    // Render!
+    for (int index = 0; index < totalPixelCount; index++) {
+        OrderedPair pixelCoord = coordinateArray[index];
+
         ProcessEvents();
 
-        if (y < windowSize.height) {
-            int i = x;
-            int j = windowSize.height - y;
-            
-            Color pixelColor = CameraSamplePixel(cam, i, j, windowSize);
-            SetColor(x, y, pixelColor);
+        int i = pixelCoord.i;
+        int j = pixelCoord.j;
 
-            x += 1;
+        Color pixelColor = CameraSamplePixel(cam, i, j, windowSize);
+        SetColor(i, windowSize.height - j, pixelColor); // invert y-axis
 
-            if (x == windowSize.width) {
-                x = 0;
-                y += 1;
-                Draw();
-            }
+        int step = 0.1f * totalPixelCount;
+        if (index % step == 0) {
+            ProcessEvents();
+            Draw();
         }
     }
 
-//        usleep((1.0f/60) * 1000000);
+    Draw();
+
+    while (1) {
+        ProcessEvents();
+        usleep((1.0f/30) * 1000000);
+    }
 
     return 0;
 }
@@ -68,4 +85,18 @@ static Camera* BuildCamera(RectSize windowSize)
     dprint(cam, Camera);
 
     return cam;
+}
+
+static void PopulateCoordinateArray(OrderedPair array[], RectSize windowSize)
+{
+    for (int i = 0; i < windowSize.width; i++) {
+        for (int j = 0; j < windowSize.height; j++) {
+            int index = j + i * windowSize.height;
+            array[index].i = i;
+            array[index].j = j;
+        }
+    }
+
+    int totalPixelCount = windowSize.width * windowSize.height;
+    RandomSort(array, totalPixelCount);
 }
