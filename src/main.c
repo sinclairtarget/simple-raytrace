@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "platform.h"
 #include "ray.h"
@@ -40,6 +41,9 @@ int main(int argc, char* argv[])
     SceneAdd(greenSphere);
 
     // Render!
+    printf("Rendering...\n");
+    time_t start = time(NULL);
+
     for (int index = 0; index < totalPixelCount; index++) {
         OrderedPair pixelCoord = coordinateArray[index];
 
@@ -59,6 +63,9 @@ int main(int argc, char* argv[])
     }
 
     Draw();
+    time_t finish = time(NULL);
+    time_t elapsed = finish - start;
+    printf("Done! Finished in %ld seconds.\n", elapsed);
 
     while (1) {
         ProcessEvents();
@@ -81,8 +88,6 @@ static Camera* BuildCamera(RectSize windowSize)
 
     Camera* cam = CameraCreateOrthographic(camPos, upDir, viewDir, 
                                            imagePlaneSize, background);
-
-    dprint(cam, Camera);
 
     return cam;
 }
