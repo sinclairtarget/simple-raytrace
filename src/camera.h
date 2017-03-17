@@ -14,13 +14,22 @@ typedef struct {
     CameraMode mode;
     RectSize imagePlaneSize;
     Color backgroundColor;
+    float focalLength; // ONLY USED BY PERSPECTIVE CAMERAS
 } Camera;
 
-Camera* CameraCreateOrthographic(Vec3 position, 
+Camera* CameraCreateOrthographic(Vec3 position,
                                  Vec3 upDirection, 
                                  Vec3 viewDirection,
                                  RectSize imagePlaneSize,
                                  Color backgroundColor);
+
+Camera* CameraCreatePerspective(Vec3 position,
+                                Vec3 upDirection, 
+                                Vec3 viewDirection,
+                                RectSize imagePlaneSize,
+                                Color backgroundColor,
+                                float focalLength);
+
 /*
  * Takes a color sample of the scene to be shown at pixel i, j of a final
  * image.

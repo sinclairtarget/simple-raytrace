@@ -18,6 +18,7 @@ int main(int argc, char* argv[])
     // Initialize the window
     Init();
     RectSize windowSize = CreateWindow(0.8f, 0.8f);
+    printf("window: [%.2f, %.2f]\n", windowSize.width, windowSize.height);
     
     // Set up the pixel coordinate array and scramble it
     int totalPixelCount = windowSize.width * windowSize.height;
@@ -28,20 +29,27 @@ int main(int argc, char* argv[])
     // Set up the scene and camera
     Camera* cam = BuildCamera(windowSize);
 
-    SceneInit(0.2f);
+    SceneInit(/* ambient light intensity = */ 0.2f);
 
-    Vec3 blueSphereCenter = { -1, 0, -5 };
+    Vec3 redSphereCenter = { 1.5f, 0, -2 };
+    Color red = { 1, 0, 0, 1 };
+    Sphere* redSphere = SphereCreate(redSphereCenter, 0.5f, red);
+    SceneAdd(redSphere);
+
+    Vec3 blueSphereCenter = { 0, 0, -3 };
     Color blue = { 0, 0, 1, 1 };
     Sphere* blueSphere = SphereCreate(blueSphereCenter, 0.5f, blue);
     SceneAdd(blueSphere);
 
-    Vec3 greenSphereCenter = { 1, 0, -7 };
+    Vec3 greenSphereCenter = { -1.5f, 0, -2 };
     Color green = { 0, 1, 0, 1 };
     Sphere* greenSphere = SphereCreate(greenSphereCenter, 0.5f, green);
     SceneAdd(greenSphere);
 
     // Render!
     printf("Rendering...\n");
+
+    int step = 0.1f * totalPixelCount;
     time_t start = time(NULL);
 
     for (int index = 0; index < totalPixelCount; index++) {
@@ -55,7 +63,6 @@ int main(int argc, char* argv[])
         Color pixelColor = CameraSamplePixel(cam, i, j, windowSize);
         SetColor(i, windowSize.height - j, pixelColor); // invert y-axis
 
-        int step = 0.1f * totalPixelCount;
         if (index % step == 0) {
             ProcessEvents();
             Draw();
@@ -86,8 +93,13 @@ static Camera* BuildCamera(RectSize windowSize)
 
     Color background = { 0, 0, 0, 1 };
 
-    Camera* cam = CameraCreateOrthographic(camPos, upDir, viewDir, 
-                                           imagePlaneSize, background);
+//    Camera* cam = CameraCreateOrthographic(camPos, upDir, viewDir,
+//                                           imagePlaneSize, background);
+    Camera* cam = CameraCreatePerspective(camPos, upDir, viewDir,
+                                          imagePlaneSize, background,
+                                          /* focal length = */ 1.73f);
+
+    dprint(cam, Camera);
 
     return cam;
 }
