@@ -3,7 +3,7 @@ require 'rake/clean'
 # Apple application bundle structure is documented here:
 # http://tinyurl.com/jz3b9j8
 
-APP_NAME = 'WindowTest'.freeze
+APP_NAME = 'SimpleRaytrace'.freeze
 SOURCE_DIRECTORY = 'src'.freeze
 ASSETS_DIRECTORY = 'assets'.freeze
 BUILD_DIRECTORY = 'build'.freeze

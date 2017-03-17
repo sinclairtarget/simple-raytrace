@@ -3,8 +3,8 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleExecutable</key>
-    <string>WindowTest</string>
+    <string>SimpleRaytrace</string>
     <key>CFBundleName</key>
-    <string>WindowTest</string>
+    <string>SimpleRaytrace</string>
 </dict>
 </plist>

@@ -71,7 +71,7 @@
                                     styleMask:NSWindowStyleMaskTitled
                                       backing:NSBackingStoreBuffered
                                         defer:NO];
-   window.title = @"WindowTest";
+   window.title = @"SimpleRaytrace";
    [window makeKeyAndOrderFront:self];
 
    return window;

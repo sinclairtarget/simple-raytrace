@@ -1,3 +1,3 @@
 #! /bin/bash
 
-./build/WindowTest.app/Contents/MacOS/WindowTest
+./build/SimpleRaytrace.app/Contents/MacOS/SimpleRaytrace
