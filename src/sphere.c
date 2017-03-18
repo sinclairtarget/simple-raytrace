@@ -5,13 +5,19 @@
 #include "sphere.h"
 #include "macros.h"
 
-Sphere* SphereCreate(Vec3 center, float radius, Color color)
+Sphere* SphereCreate(Vec3 center, 
+                     float radius,
+                     Color color,
+                     Color specularColor,
+                     float phongExponent)
 {
     Sphere* sphere = (Sphere*) malloc(sizeof(Sphere));
 
     sphere->center = center;
     sphere->radius = radius;
     sphere->color = color;
+    sphere->specularColor = specularColor;
+    sphere->phongExponent = phongExponent;
 
     return sphere;
 }

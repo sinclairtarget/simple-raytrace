@@ -12,6 +12,7 @@
 
 static Camera* BuildCamera();
 static void PopulateCoordinateArray(OrderedPair array[], RectSize windowSize);
+static void BuildScene();
 
 int main(int argc, char* argv[])
 {
@@ -29,22 +30,7 @@ int main(int argc, char* argv[])
     // Set up the scene and camera
     Camera* cam = BuildCamera(windowSize);
 
-    SceneInit(/* ambient light intensity = */ 0.2f);
-
-    Vec3 redSphereCenter = { 1.5f, 0, -2 };
-    Color red = { 1, 0, 0, 1 };
-    Sphere* redSphere = SphereCreate(redSphereCenter, 0.5f, red);
-    SceneAdd(redSphere);
-
-    Vec3 blueSphereCenter = { 0, 0, -3 };
-    Color blue = { 0, 0, 1, 1 };
-    Sphere* blueSphere = SphereCreate(blueSphereCenter, 0.5f, blue);
-    SceneAdd(blueSphere);
-
-    Vec3 greenSphereCenter = { -1.5f, 0, -2 };
-    Color green = { 0, 1, 0, 1 };
-    Sphere* greenSphere = SphereCreate(greenSphereCenter, 0.5f, green);
-    SceneAdd(greenSphere);
+    BuildScene();
 
     // Render!
     printf("Rendering...\n");
@@ -102,6 +88,31 @@ static Camera* BuildCamera(RectSize windowSize)
     dprint(cam, Camera);
 
     return cam;
+}
+
+static void BuildScene()
+{
+    SceneInit(/* ambient light intensity = */ 0.2f);
+
+    Color specularColor = { 0.6f, 0.6f, 0.6f, 1 };
+
+    Vec3 redSphereCenter = { 1.5f, 0, -2.5f };
+    Color red = { 1, 0, 0, 1 };
+    Sphere* redSphere = SphereCreate(redSphereCenter, 0.5f, red, 
+                                     specularColor, 10);
+    SceneAdd(redSphere);
+
+    Vec3 blueSphereCenter = { 0, 0, -3 };
+    Color blue = { 0, 0, 1, 1 };
+    Sphere* blueSphere = SphereCreate(blueSphereCenter, 0.5f, blue,
+                                      specularColor, 100);
+    SceneAdd(blueSphere);
+
+    Vec3 greenSphereCenter = { -1.5f, 0, -2.5f };
+    Color green = { 0, 1, 0, 1 };
+    Sphere* greenSphere = SphereCreate(greenSphereCenter, 0.5f, green,
+                                       specularColor, 1000);
+    SceneAdd(greenSphere);
 }
 
 static void PopulateCoordinateArray(OrderedPair array[], RectSize windowSize)
