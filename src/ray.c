@@ -17,8 +17,8 @@ RayHit* RayCast(Ray* ray)
     RayHit* closestHit = NULL;
 
     for (int index = 0; index < globalScene->objectCount; index++) {
-        Sphere* sphere = globalScene->objects[index];
-        RayHit* hit = SphereIntersect(sphere, ray);
+        SceneObject* obj = globalScene->objects[index];
+        RayHit* hit = SceneObjectIntersect(obj, ray);
 
         if (hit == NULL)
             continue;

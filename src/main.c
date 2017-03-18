@@ -100,19 +100,19 @@ static void BuildScene()
     Color red = { 1, 0, 0, 1 };
     Sphere* redSphere = SphereCreate(redSphereCenter, 0.5f, red, 
                                      specularColor, 10);
-    SceneAdd(redSphere);
+    SceneAddSphere(redSphere);
 
     Vec3 blueSphereCenter = { 0, 0, -3 };
     Color blue = { 0, 0, 1, 1 };
     Sphere* blueSphere = SphereCreate(blueSphereCenter, 0.5f, blue,
                                       specularColor, 100);
-    SceneAdd(blueSphere);
+    SceneAddSphere(blueSphere);
 
     Vec3 greenSphereCenter = { -1.5f, 0, -2.5f };
     Color green = { 0, 1, 0, 1 };
     Sphere* greenSphere = SphereCreate(greenSphereCenter, 0.5f, green,
                                        specularColor, 1000);
-    SceneAdd(greenSphere);
+    SceneAddSphere(greenSphere);
 }
 
 static void PopulateCoordinateArray(OrderedPair array[], RectSize windowSize)

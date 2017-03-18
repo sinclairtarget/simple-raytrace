@@ -11,7 +11,7 @@ void SceneInit(float ambientLightIntensity)
     globalScene->ambientLightIntensity = ambientLightIntensity;
 }
 
-int SceneAdd(Sphere* sphere)
+int SceneAddSphere(Sphere* sphere)
 {
     if (globalScene == NULL)
         return 1;
@@ -19,10 +19,19 @@ int SceneAdd(Sphere* sphere)
     if (globalScene->objectCount == MAX_SCENE_OBJECTS)
         return 2;
 
-    globalScene->objects[globalScene->objectCount] = sphere;
+    SceneObject* obj = malloc(sizeof(SceneObject));
+    obj->surface = sphere;
+    obj->intersectFunction = SphereIntersect;
+
+    globalScene->objects[globalScene->objectCount] = obj;
     (globalScene->objectCount)++;
 
     return 0;
+}
+
+RayHit* SceneObjectIntersect(SceneObject* obj, Ray* ray)
+{
+    return obj->intersectFunction(obj->surface, ray);
 }
 
 char* SceneToString()

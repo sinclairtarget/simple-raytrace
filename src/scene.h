@@ -5,8 +5,15 @@
 
 #define MAX_SCENE_OBJECTS 10
 
+typedef RayHit* (*IntersectFunction)(void* surface, Ray* ray);
+
 typedef struct {
-    Sphere* objects[MAX_SCENE_OBJECTS];
+    void* surface;
+    IntersectFunction intersectFunction;
+} SceneObject;
+
+typedef struct {
+    SceneObject* objects[MAX_SCENE_OBJECTS];
     int objectCount;
     float ambientLightIntensity;
 } Scene;
@@ -16,7 +23,11 @@ extern Scene* globalScene;
 void SceneInit(float ambientLightIntensity);
 
 // Adds a sphere to the scene.
-int SceneAdd(Sphere* sphere);
+int SceneAddSphere(Sphere* sphere);
+
+// Returns the intersect between the ray and the given scene object, or NULL if
+// no intersection exists.
+RayHit* SceneObjectIntersect(SceneObject* obj, Ray* ray);
 
 char* SceneToString();
 

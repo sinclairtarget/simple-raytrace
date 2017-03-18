@@ -24,7 +24,7 @@ Sphere* SphereCreate(Vec3 center,
  * 
  * If the ray does not intersect the sphere, returns nothing.
  */
-RayHit* SphereIntersect(Sphere* sphere, Ray* ray);
+RayHit* SphereIntersect(void* surface, Ray* ray);
 
 // String representation for debugging.
 char* SphereToString(Sphere* sphere);

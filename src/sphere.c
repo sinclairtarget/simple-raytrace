@@ -22,8 +22,9 @@ Sphere* SphereCreate(Vec3 center,
     return sphere;
 }
 
-RayHit* SphereIntersect(Sphere* sphere, Ray* ray)
+RayHit* SphereIntersect(void* surface, Ray* ray)
 {
+    Sphere* sphere = (Sphere*) surface;
     Vec3 originMinusCenter = Vec3Sub(ray->origin, sphere->center);
     float dotDirection = Vec3Dot(ray->direction, ray->direction);
 
