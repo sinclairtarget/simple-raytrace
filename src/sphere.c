@@ -48,7 +48,8 @@ RayHit* SphereIntersect(Sphere* sphere, Ray* ray)
     Vec3 normal = 
         Vec3Scale(Vec3Sub(point, sphere->center), 1 / sphere->radius);
 
-    RayHit* hit = RayHitCreate(sphere->color, point, normal, smallerT);
+    RayHit* hit = RayHitCreate(sphere->color, sphere->specularColor,
+                               sphere->phongExponent, point, normal, smallerT);
     return hit;
 }
 

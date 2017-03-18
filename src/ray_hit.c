@@ -3,11 +3,18 @@
 
 #include "ray_hit.h"
 
-RayHit* RayHitCreate(Color surfaceColor, Vec3 point, Vec3 normal, float t)
+RayHit* RayHitCreate(Color surfaceColor, 
+                     Color surfaceSpecularColor,
+                     float surfacePhongExponent,
+                     Vec3 point, 
+                     Vec3 normal, 
+                     float t)
 {
     RayHit* hit = (RayHit*) malloc(sizeof(RayHit));
 
     hit->surfaceColor = surfaceColor;
+    hit->surfaceSpecularColor = surfaceSpecularColor;
+    hit->surfacePhongExponent = surfacePhongExponent;
     hit->point = point;
     hit->normal = normal;
     hit->t = t;
