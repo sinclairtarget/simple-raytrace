@@ -20,6 +20,21 @@ Triangle* TriangleCreate(Vec3 a,
                          Color specularColor,
                          float phongExponent);
 
+/*
+ * Returns the normal vector for the given triangle, in normalized form.
+ *
+ * The normal points "up" when a, b, and c appear counterclockwise.
+ */
+Vec3 TriangleNormal(Triangle* triangle);
+
+/* 
+ * If the ray intersects the triangle, returns the first intersection (i.e. the
+ * intersection closest to the ray's origin).
+ * 
+ * If the ray does not intersect the triangle, returns nothing.
+ */
+RayHit* TriangleIntersect(void* surface, Ray* ray);
+
 // String representation for debugging.
 char* TriangleToString(Triangle* triangle);
 

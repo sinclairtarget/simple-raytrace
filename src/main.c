@@ -84,9 +84,7 @@ static Camera* BuildCamera(RectSize windowSize)
     Camera* cam = CameraCreatePerspective(camPos, upDir, viewDir,
                                           imagePlaneSize, background,
                                           /* focal length = */ 1.73f);
-
     dprint(cam, Camera);
-
     return cam;
 }
 
@@ -95,21 +93,27 @@ static void BuildScene()
     SceneInit(/* ambient light intensity = */ 0.2f);
 
     Color specularColor = { 0.6f, 0.6f, 0.6f, 1 };
+    Color red = { 1, 0, 0, 1 };
+    Color blue = { 0, 0, 1, 1 };
+    Color green = { 0, 1, 0, 1 };
+
+    Vec3 a = { 0, 0, -1 };
+    Vec3 b = { 1, 0, -1 };
+    Vec3 c = { 0, 1, -1 };
+    Triangle* triangle = TriangleCreate(a, b, c, red, specularColor, 10);
+    SceneAddTriangle(triangle);
 
     Vec3 redSphereCenter = { 1.5f, 0, -2.5f };
-    Color red = { 1, 0, 0, 1 };
     Sphere* redSphere = SphereCreate(redSphereCenter, 0.5f, red, 
                                      specularColor, 10);
     SceneAddSphere(redSphere);
 
     Vec3 blueSphereCenter = { 0, 0, -3 };
-    Color blue = { 0, 0, 1, 1 };
     Sphere* blueSphere = SphereCreate(blueSphereCenter, 0.5f, blue,
                                       specularColor, 100);
     SceneAddSphere(blueSphere);
 
     Vec3 greenSphereCenter = { -1.5f, 0, -2.5f };
-    Color green = { 0, 1, 0, 1 };
     Sphere* greenSphere = SphereCreate(greenSphereCenter, 0.5f, green,
                                        specularColor, 1000);
     SceneAddSphere(greenSphere);

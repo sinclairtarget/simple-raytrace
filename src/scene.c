@@ -29,6 +29,24 @@ int SceneAddSphere(Sphere* sphere)
     return 0;
 }
 
+int SceneAddTriangle(Triangle* triangle)
+{
+    if (globalScene == NULL)
+        return 1;
+
+    if (globalScene->objectCount == MAX_SCENE_OBJECTS)
+        return 2;
+
+    SceneObject* obj = malloc(sizeof(SceneObject));
+    obj->surface = triangle;
+    obj->intersectFunction = TriangleIntersect;
+
+    globalScene->objects[globalScene->objectCount] = obj;
+    (globalScene->objectCount)++;
+
+    return 0;
+}
+
 RayHit* SceneObjectIntersect(SceneObject* obj, Ray* ray)
 {
     return obj->intersectFunction(obj->surface, ray);

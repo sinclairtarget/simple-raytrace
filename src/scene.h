@@ -25,6 +25,9 @@ void SceneInit(float ambientLightIntensity);
 // Adds a sphere to the scene.
 int SceneAddSphere(Sphere* sphere);
 
+// Adds a triangle to the scene.
+int SceneAddTriangle(Triangle* triangle);
+
 // Returns the intersect between the ray and the given scene object, or NULL if
 // no intersection exists.
 RayHit* SceneObjectIntersect(SceneObject* obj, Ray* ray);
