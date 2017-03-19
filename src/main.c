@@ -70,9 +70,9 @@ int main(int argc, char* argv[])
 
 static Camera* BuildCamera(RectSize windowSize)
 {
-    Vec3 camPos = { 0, 0, 0 };
+    Vec3 camPos = { 0, 1.2f, 0 };
     Vec3 upDir = { 0, 1, 0 };
-    Vec3 viewDir = { 0, 0, -1 }; 
+    Vec3 viewDir = { 0, -0.5f, -1 }; 
 
     float aspect = windowSize.width / (float)windowSize.height;
     RectSize imagePlaneSize = { 2 * aspect, 2 };
@@ -92,30 +92,39 @@ static void BuildScene()
 {
     SceneInit(/* ambient light intensity = */ 0.2f);
 
-    Color specularColor = { 0.6f, 0.6f, 0.6f, 1 };
-    Color red = { 1, 0, 0, 1 };
-    Color blue = { 0, 0, 1, 1 };
-    Color green = { 0, 1, 0, 1 };
+    Color floorColor = { 0.4f, 0.4f, 0.33f, 1 };
+    Color gray = { 0.6f, 0.6f, 0.6f, 1 };
+    Color red = { 0.71f, 0.25f, 0.25f, 1 };
+    Color blue = { 0.31f, 0.52f, 0.85f, 1 };
+    Color green = { 0.33f, 0.71f, 0.31f, 1 };
 
-    Vec3 a = { 0, 0, -1 };
-    Vec3 b = { 1, 0, -1 };
-    Vec3 c = { 0, 1, -1 };
-    Triangle* triangle = TriangleCreate(a, b, c, red, specularColor, 10);
-    SceneAddTriangle(triangle);
+    // Create a floor from two tris
+    Vec3 a = { -2.5f, -0.5f, 0 };
+    Vec3 b = { 2.5f, -0.5f, 0 };
+    Vec3 c = { -2.5f, -0.5f, -5 };
+    Triangle* left = TriangleCreate(a, b, c, floorColor, gray, 10);
+    SceneAddTriangle(left);
 
+    Vec3 d = { -2.5f, -0.5f, -5 };
+    Vec3 e = { 2.5f, -0.5f, 0 };
+    Vec3 f = { 2.5f, -0.5f, -5 };
+    Triangle* right = TriangleCreate(d, e, f, floorColor, gray, 10);
+    SceneAddTriangle(right);
+
+    // Add colored spheres
     Vec3 redSphereCenter = { 1.5f, 0, -2.5f };
     Sphere* redSphere = SphereCreate(redSphereCenter, 0.5f, red, 
-                                     specularColor, 10);
+                                     gray, 10);
     SceneAddSphere(redSphere);
 
     Vec3 blueSphereCenter = { 0, 0, -3 };
     Sphere* blueSphere = SphereCreate(blueSphereCenter, 0.5f, blue,
-                                      specularColor, 100);
+                                      gray, 100);
     SceneAddSphere(blueSphere);
 
     Vec3 greenSphereCenter = { -1.5f, 0, -2.5f };
     Sphere* greenSphere = SphereCreate(greenSphereCenter, 0.5f, green,
-                                       specularColor, 1000);
+                                       gray, 1000);
     SceneAddSphere(greenSphere);
 }
 
