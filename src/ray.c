@@ -12,7 +12,7 @@ Ray* RayCreate(Vec3 origin, Vec3 direction)
     return ray;
 }
 
-RayHit* RayCast(Ray* ray)
+RayHit* RayCast(Ray* ray, float epsilon)
 {
     RayHit* closestHit = NULL;
 
@@ -20,7 +20,7 @@ RayHit* RayCast(Ray* ray)
         SceneObject* obj = globalScene->objects[index];
         RayHit* hit = SceneObjectIntersect(obj, ray);
 
-        if (hit == NULL)
+        if (hit == NULL || hit->t < epsilon)
             continue;
 
         if (closestHit == NULL || hit->t < closestHit->t)

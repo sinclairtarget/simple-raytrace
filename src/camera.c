@@ -60,7 +60,7 @@ Color CameraSamplePixel(Camera* camera, int i, int j, RectSize imageSize)
     else
         ray = CameraGenerateRayPerspective(camera, i, j, imageSize);
 
-    RayHit* hit = RayCast(ray);
+    RayHit* hit = RayCast(ray, 0);
 
     Color color;
     if (hit == NULL)

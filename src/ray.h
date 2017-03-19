@@ -4,6 +4,8 @@
 #include "vec3.h"
 #include "ray_hit.h"
 
+#define EPSILON 0.00001f
+
 typedef struct {
     Vec3 origin;
     Vec3 direction;
@@ -12,11 +14,12 @@ typedef struct {
 Ray* RayCreate(Vec3 origin, Vec3 direction);
 
 /* 
- * Shoots the ray into the scene, returning the closest surface intersection.
+ * Shoots the ray into the scene, returning the closest surface intersection
+ * further away that epsilon.
  *
  * Returns NULL if nothing was hit.
  */
-RayHit* RayCast(Ray* ray);
+RayHit* RayCast(Ray* ray, float epsilon);
 
 // Returns the point along the ray where the ray parameter is t.
 Vec3 RayEvaluatePoint(Ray* ray, float t);
