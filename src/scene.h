@@ -15,12 +15,13 @@ typedef struct {
 typedef struct {
     SceneObject* objects[MAX_SCENE_OBJECTS];
     int objectCount;
+    Vec3 lightDirection;
     float ambientLightIntensity;
 } Scene;
 
 extern Scene* globalScene;
 
-void SceneInit(float ambientLightIntensity);
+void SceneInit(Vec3 lightDirection, float ambientLightIntensity);
 
 // Adds a sphere to the scene.
 int SceneAddSphere(Sphere* sphere);

@@ -5,9 +5,10 @@
 
 Scene* globalScene;
 
-void SceneInit(float ambientLightIntensity)
+void SceneInit(Vec3 lightDirection, float ambientLightIntensity)
 {
     globalScene = (Scene*) calloc(1, sizeof(Scene));
+    globalScene->lightDirection = lightDirection;
     globalScene->ambientLightIntensity = ambientLightIntensity;
 }
 

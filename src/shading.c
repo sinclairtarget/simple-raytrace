@@ -7,8 +7,7 @@
 
 Color Shade(Camera* camera, RayHit* hit)
 {
-    Vec3 lightDir = { 1, 1, 1 };
-    Vec3 lightDirNorm = Vec3Norm(lightDir);
+    Vec3 lightDirNorm = Vec3Norm(globalScene->lightDirection);
     float lightIntensity = 0.7f;
 
     // Calculate ambient component
@@ -16,7 +15,7 @@ Color Shade(Camera* camera, RayHit* hit)
         ColorScale(hit->surfaceColor, globalScene->ambientLightIntensity);
 
     // Return early if point is in shadow
-    Ray* shadowRay = RayCreate(hit->point, lightDir);
+    Ray* shadowRay = RayCreate(hit->point, lightDirNorm);
     RayHit* shadowHit = RayCast(shadowRay, EPSILON);
     if (shadowHit != NULL)
         return ambient;
@@ -28,7 +27,7 @@ Color Shade(Camera* camera, RayHit* hit)
 
     // Calculate blinn-phong component
     Vec3 camDir = Vec3Norm(Vec3Sub(camera->position, hit->point));
-    Vec3 halfVector = Vec3Norm(Vec3Add(camDir, lightDir));
+    Vec3 halfVector = Vec3Norm(Vec3Add(camDir, lightDirNorm));
 
     float halfVectorAngleCooefficent =
         max(0, Vec3Dot(hit->normal, halfVector));

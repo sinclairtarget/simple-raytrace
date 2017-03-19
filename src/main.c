@@ -70,9 +70,9 @@ int main(int argc, char* argv[])
 
 static Camera* BuildCamera(RectSize windowSize)
 {
-    Vec3 camPos = { 0, 1.2f, 0 };
+    Vec3 camPos = { 0, 1, 0 };
     Vec3 upDir = { 0, 1, 0 };
-    Vec3 viewDir = { 0, -0.5f, -1 }; 
+    Vec3 viewDir = { 0, -0.25f, -1 }; 
 
     float aspect = windowSize.width / (float)windowSize.height;
     RectSize imagePlaneSize = { 2 * aspect, 2 };
@@ -90,41 +90,38 @@ static Camera* BuildCamera(RectSize windowSize)
 
 static void BuildScene()
 {
-    SceneInit(/* ambient light intensity = */ 0.2f);
+    Vec3 lightDirection = { -1, 0.75f, 0.5f };
+    SceneInit(lightDirection, /* ambient light intensity = */ 0.2f);
 
     Color floorColor = { 0.4f, 0.4f, 0.33f, 1 };
+    Color darkGray = { 0.2f, 0.2f, 0.2f, 1 };
     Color gray = { 0.6f, 0.6f, 0.6f, 1 };
     Color red = { 0.71f, 0.25f, 0.25f, 1 };
     Color blue = { 0.31f, 0.52f, 0.85f, 1 };
     Color green = { 0.33f, 0.71f, 0.31f, 1 };
 
     // Create a floor from two tris
-    Vec3 a = { -2.5f, -0.5f, 0 };
-    Vec3 b = { 2.5f, -0.5f, 0 };
-    Vec3 c = { -2.5f, -0.5f, -5 };
+    Vec3 a = { -5, 0, 0 };
+    Vec3 b = { 5, 0, 0 };
+    Vec3 c = { -5, 0, -10 };
     Triangle* left = TriangleCreate(a, b, c, floorColor, gray, 10);
     SceneAddTriangle(left);
 
-    Vec3 d = { -2.5f, -0.5f, -5 };
-    Vec3 e = { 2.5f, -0.5f, 0 };
-    Vec3 f = { 2.5f, -0.5f, -5 };
+    Vec3 d = { -5, 0, -10 };
+    Vec3 e = { 5, 0, 0 };
+    Vec3 f = { 5, 0, -10 };
     Triangle* right = TriangleCreate(d, e, f, floorColor, gray, 10);
     SceneAddTriangle(right);
 
     // Add colored spheres
-    Vec3 redSphereCenter = { 1.5f, 0, -2.5f };
-    Sphere* redSphere = SphereCreate(redSphereCenter, 0.5f, red, 
-                                     gray, 10);
-    SceneAddSphere(redSphere);
-
-    Vec3 blueSphereCenter = { 0, 0, -3 };
+    Vec3 blueSphereCenter = { 0.60f, 0.5f, -3.10 };
     Sphere* blueSphere = SphereCreate(blueSphereCenter, 0.5f, blue,
-                                      gray, 100);
+                                      darkGray, 10);
     SceneAddSphere(blueSphere);
 
-    Vec3 greenSphereCenter = { -1.5f, 0, -2.5f };
+    Vec3 greenSphereCenter = { -0.65f, 0.5f, -2.75f };
     Sphere* greenSphere = SphereCreate(greenSphereCenter, 0.5f, green,
-                                       gray, 1000);
+                                       gray, 100);
     SceneAddSphere(greenSphere);
 }
 

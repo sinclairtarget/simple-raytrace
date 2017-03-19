@@ -4,7 +4,7 @@
 #include "vec3.h"
 #include "ray_hit.h"
 
-#define EPSILON 0.00001f
+#define EPSILON 0.0001f
 
 typedef struct {
     Vec3 origin;
