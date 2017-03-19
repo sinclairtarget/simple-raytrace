@@ -4,6 +4,6 @@
 #include "camera.h"
 #include "ray.h"
 
-Color Shade(Camera* camera, RayHit* hit);
+Color Shade(Camera* camera, RayHit* hit, int reflectionDepth);
 
 #endif

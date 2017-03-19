@@ -9,7 +9,8 @@ Sphere* SphereCreate(Vec3 center,
                      float radius,
                      Color color,
                      Color specularColor,
-                     float phongExponent)
+                     float phongExponent,
+                     Color reflectiveColor)
 {
     Sphere* sphere = (Sphere*) malloc(sizeof(Sphere));
 
@@ -18,6 +19,7 @@ Sphere* SphereCreate(Vec3 center,
     sphere->color = color;
     sphere->specularColor = specularColor;
     sphere->phongExponent = phongExponent;
+    sphere->reflectiveColor = reflectiveColor;
 
     return sphere;
 }
@@ -50,7 +52,8 @@ RayHit* SphereIntersect(void* surface, Ray* ray)
         Vec3Scale(Vec3Sub(point, sphere->center), 1 / sphere->radius);
 
     RayHit* hit = RayHitCreate(sphere->color, sphere->specularColor,
-                               sphere->phongExponent, point, normal, smallerT);
+                               sphere->phongExponent, sphere->reflectiveColor,
+                               point, normal, smallerT);
     return hit;
 }
 

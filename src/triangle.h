@@ -11,6 +11,7 @@ typedef struct {
     Color color;
     Color specularColor;
     float phongExponent;
+    Color reflectiveColor;
 } Triangle;
 
 Triangle* TriangleCreate(Vec3 a,
@@ -18,7 +19,8 @@ Triangle* TriangleCreate(Vec3 a,
                          Vec3 c,
                          Color color,
                          Color specularColor,
-                         float phongExponent);
+                         float phongExponent,
+                         Color reflectiveColor);
 
 /*
  * Returns the normal vector for the given triangle, in normalized form.

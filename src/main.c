@@ -70,9 +70,9 @@ int main(int argc, char* argv[])
 
 static Camera* BuildCamera(RectSize windowSize)
 {
-    Vec3 camPos = { 0, 1, 0 };
+    Vec3 camPos = { 0, 0.75f, 0 };
     Vec3 upDir = { 0, 1, 0 };
-    Vec3 viewDir = { 0, -0.25f, -1 }; 
+    Vec3 viewDir = { 0, -0.2f, -1 }; 
 
     float aspect = windowSize.width / (float)windowSize.height;
     RectSize imagePlaneSize = { 2 * aspect, 2 };
@@ -104,24 +104,24 @@ static void BuildScene()
     Vec3 a = { -5, 0, 0 };
     Vec3 b = { 5, 0, 0 };
     Vec3 c = { -5, 0, -10 };
-    Triangle* left = TriangleCreate(a, b, c, floorColor, gray, 10);
+    Triangle* left = TriangleCreate(a, b, c, floorColor, gray, 10, darkGray);
     SceneAddTriangle(left);
 
     Vec3 d = { -5, 0, -10 };
     Vec3 e = { 5, 0, 0 };
     Vec3 f = { 5, 0, -10 };
-    Triangle* right = TriangleCreate(d, e, f, floorColor, gray, 10);
+    Triangle* right = TriangleCreate(d, e, f, floorColor, gray, 10, darkGray);
     SceneAddTriangle(right);
 
     // Add colored spheres
     Vec3 blueSphereCenter = { 0.60f, 0.5f, -3.10 };
     Sphere* blueSphere = SphereCreate(blueSphereCenter, 0.5f, blue,
-                                      darkGray, 10);
+                                      darkGray, 10, BLACK_COLOR);
     SceneAddSphere(blueSphere);
 
     Vec3 greenSphereCenter = { -0.65f, 0.5f, -2.75f };
     Sphere* greenSphere = SphereCreate(greenSphereCenter, 0.5f, green,
-                                       gray, 100);
+                                       gray, 100, BLACK_COLOR);
     SceneAddSphere(greenSphere);
 }
 

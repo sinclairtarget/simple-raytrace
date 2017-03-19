@@ -9,6 +9,7 @@ typedef struct {
     Color surfaceColor;
     Color surfaceSpecularColor;
     float surfacePhongExponent;
+    Color reflectiveColor;
     Vec3 point;  // The world-space point at which the intersection occurred.
     Vec3 normal; // The normal vector on the surface at the intersection point.
     float t;     // The ray parameter. (How far along the ray?)
@@ -17,6 +18,7 @@ typedef struct {
 RayHit* RayHitCreate(Color surfaceColor, 
                      Color surfaceSpecularColor,
                      float surfacePhongExponent,
+                     Color reflectiveColor,
                      Vec3 point, 
                      Vec3 normal, 
                      float t);

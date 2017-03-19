@@ -10,13 +10,15 @@ typedef struct {
     Color color;
     Color specularColor;
     float phongExponent;
+    Color reflectiveColor;
 } Sphere;
 
 Sphere* SphereCreate(Vec3 center, 
                      float radius,
                      Color color,
                      Color specularColor,
-                     float phongExponent);
+                     float phongExponent,
+                     Color reflectiveColor);
 
 /* 
  * If the ray intersects the sphere, returns the first intersection (i.e. the

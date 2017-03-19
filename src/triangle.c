@@ -8,7 +8,8 @@ Triangle* TriangleCreate(Vec3 a,
                          Vec3 c,
                          Color color,
                          Color specularColor,
-                         float phongExponent)
+                         float phongExponent,
+                         Color reflectiveColor)
 {
     Triangle* triangle = (Triangle*) malloc(sizeof(Triangle));
 
@@ -18,6 +19,7 @@ Triangle* TriangleCreate(Vec3 a,
     triangle->color = color;
     triangle->specularColor = specularColor;
     triangle->phongExponent = phongExponent;
+    triangle->reflectiveColor = reflectiveColor;
 
     return triangle;
 }
@@ -75,7 +77,8 @@ RayHit* TriangleIntersect(void* surface, Ray* ray)
     Vec3 normal = TriangleNormal(tri);
 
     RayHit* hit = RayHitCreate(tri->color, tri->specularColor,
-                               tri->phongExponent, point, normal, t);
+                               tri->phongExponent, tri->reflectiveColor,
+                               point, normal, t);
     return hit;
 }
 

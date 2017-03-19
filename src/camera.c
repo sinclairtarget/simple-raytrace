@@ -66,7 +66,7 @@ Color CameraSamplePixel(Camera* camera, int i, int j, RectSize imageSize)
     if (hit == NULL)
         color = camera->backgroundColor;
     else
-        color = Shade(camera, hit);
+        color = Shade(camera, hit, 0);
 
     free(ray);
     free(hit);
