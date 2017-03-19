@@ -1,6 +1,8 @@
 # simple-raytrace
-A basic ray tracing implementation with shading and shadows, based on the raytracer outlined 
+A basic ray tracing implementation with shading, shadows, and reflections, based on the raytracer outlined 
 in Chapter 4 of [Fundamentals of Computer Graphics](https://www.amazon.com/Fundamentals-Computer-Graphics-Fourth-Marschner/dp/1482229390/ref=pd_sbs_14_img_0?_encoding=UTF8&psc=1&refRID=GHEARH14T336MV9W8EBW).
+
+![](render.gif)
 
 Runs on Mac OS only for now.
 
