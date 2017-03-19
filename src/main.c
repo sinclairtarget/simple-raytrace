@@ -72,7 +72,7 @@ static Camera* BuildCamera(RectSize windowSize)
 {
     Vec3 camPos = { 0, 0.75f, 0 };
     Vec3 upDir = { 0, 1, 0 };
-    Vec3 viewDir = { 0, -0.2f, -1 }; 
+    Vec3 viewDir = { 0, -0.25f, -1 }; 
 
     float aspect = windowSize.width / (float)windowSize.height;
     RectSize imagePlaneSize = { 2 * aspect, 2 };
@@ -84,7 +84,6 @@ static Camera* BuildCamera(RectSize windowSize)
     Camera* cam = CameraCreatePerspective(camPos, upDir, viewDir,
                                           imagePlaneSize, background,
                                           /* focal length = */ 1.73f);
-    dprint(cam, Camera);
     return cam;
 }
 
