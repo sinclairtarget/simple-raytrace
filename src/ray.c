@@ -20,11 +20,24 @@ RayHit* RayCast(Ray* ray, float epsilon)
         SceneObject* obj = globalScene->objects[index];
         RayHit* hit = SceneObjectIntersect(obj, ray);
 
-        if (hit == NULL || hit->t < epsilon)
+        if (hit == NULL)
             continue;
 
-        if (closestHit == NULL || hit->t < closestHit->t)
+        if (hit->t < epsilon) {
+            free(hit);
+            continue;
+        }
+
+        if (closestHit == NULL) {
             closestHit = hit;
+        }
+        else if (hit->t < closestHit->t) {
+            free(closestHit);
+            closestHit = hit;
+        }
+        else {
+            free(hit);
+        }
     }
 
     return closestHit;
