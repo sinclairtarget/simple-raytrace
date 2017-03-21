@@ -36,4 +36,4 @@ cp assets/skyrim.png assets/skyrim_man.png build/SimpleRaytrace.app/Contents/Res
 You can then run the program either by double-clicking on the created app or by using the `run.sh` script provided.
 
 ### Changing the Scene
-The scene and the objects in it are hard-coded. See `BuildScene()` in [src/main.c](src/main.c). 
+The scene and the objects in it are hard-coded. See `BuildScene()` in [src/main.c](https://github.com/sinclairtarget/simple-raytrace/blob/master/src/main.c#L89). 
