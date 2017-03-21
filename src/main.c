@@ -18,8 +18,7 @@ int main(int argc, char* argv[])
 {
     // Initialize the window
     Init();
-    RectSize windowSize = CreateWindow(0.8f, 0.8f);
-    printf("window: [%.2f, %.2f]\n", windowSize.width, windowSize.height);
+    RectSize windowSize = CreateWindow(800, 600);
     
     // Set up the pixel coordinate array and scramble it
     int totalPixelCount = windowSize.width * windowSize.height;

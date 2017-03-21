@@ -17,9 +17,17 @@ void Init();
 /*
  * Creates and shows a window. Returns the window dimensions as a RectSize.
  *
+ * The size of the window is expressed directly.
+ */
+RectSize CreateWindow(float width, float height);
+
+/*
+ * Creates and shows a window. Returns the window dimensions as a RectSize.
+ *
  * The size of the window can be expressed as a ratio to screen size.
  */
-RectSize CreateWindow(float proportionalWidth, float proportionalHeight);
+RectSize CreateWindowProportional(float proportionalWidth, 
+                                  float proportionalHeight);
 
 /*
  * Pulls all events from the event queue and dispatches them.

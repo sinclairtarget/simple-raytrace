@@ -21,7 +21,21 @@ void Init()
     }
 }
 
-RectSize CreateWindow(float proportionalWidth, float proportionalHeight)
+RectSize CreateWindow(float width, float height)
+{
+    @autoreleasepool {
+        NSSize frameSize = NSMakeSize(width, height);
+        window = [[BitmapWindow alloc] initWithSize:frameSize];
+
+        RectSize size;
+        size.width = window.contentBounds.size.width;
+        size.height = window.contentBounds.size.height;
+        return size;
+    }
+}
+
+RectSize CreateWindowProportional(float proportionalWidth, 
+                                  float proportionalHeight)
 {
     @autoreleasepool {
         NSSize proportionalSize = 
