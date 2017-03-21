@@ -2,6 +2,7 @@
 #import "ApplicationDelegate.h"
 #import "BitmapWindow.h"
 
+static ApplicationDelegate* appDelegate;
 static BitmapWindow* window;
 
 void Init()
@@ -13,11 +14,11 @@ void Init()
         [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
         [NSApp activateIgnoringOtherApps:YES];
 
-        [[NSApplication sharedApplication] finishLaunching];
-
         // Manually set an application delegate
-        ApplicationDelegate* delegate = [[ApplicationDelegate alloc] init];
-        [[NSApplication sharedApplication] setDelegate:delegate];
+        appDelegate = [[ApplicationDelegate alloc] init];
+        [NSApp setDelegate:appDelegate];
+
+        [NSApp finishLaunching];
     }
 }
 
@@ -61,7 +62,6 @@ void ProcessEvents()
                                                    inMode:NSDefaultRunLoopMode
                                                   dequeue:YES];
             if (event != nil) {
-                //NSLog(@"Sending event: %@", event);
                 [NSApp sendEvent:event];
             }
             else {
