@@ -6,6 +6,17 @@ in Chapter 4 of [Fundamentals of Computer Graphics](https://www.amazon.com/Funda
 
 Runs on Mac OS only for now.
 
+### Example Renderings
+
+#### _Twin Spheres_
+![](renders/spheres.png)
+
+#### _Floating Cube_
+![](renders/cube.png)
+
+#### _The Great Pyramid_
+![](renders/pyramid.png)
+
 ### Compiling
 [Rake](http://rake.rubyforge.org/) is used to build the program. Assuming you have Ruby and Rake installed:
 ```
